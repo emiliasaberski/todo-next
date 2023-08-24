@@ -3,26 +3,28 @@
 type TodoItemProps = {
   id: string
   title: string
+  content: string
   done: boolean
-  toggleTodo: (id: string, done: boolean) => void
 }
 
-export function TodoItem({ id, title, done, toggleTodo }: TodoItemProps) {
+export function TodoItem({ id, title, content, done }: TodoItemProps) {
   return (
-    <li className="flex gap-1 items-center">
+    <>
+    <li className="flex gap-3 items-center">
       <input
         id={id}
         type="checkbox"
         className="cursor-pointer peer"
         defaultChecked={done}
-        onChange={e => toggleTodo(id, e.target.checked)}
       />
       <label
         htmlFor={id}
-        className="cursor-pointer peer-checked:line-through peer-checked:text-slate-500"
+        className="cursor-pointer text-lg peer-checked:line-through peer-checked:text-slate-500"
       >
         {title}
+      <p className="text-sm">{content}</p>
       </label>
     </li>
+    </>
   )
 }

@@ -1,4 +1,5 @@
 import { TodoItem } from "../components/TodoItem"
+import { NewTask } from "../components/NewTask"
 import { prisma } from "../db"
 
 export default async function Home() {
@@ -6,12 +7,15 @@ export default async function Home() {
   const todos = await prisma.post.findMany()
   return (
   <>
-    <h1 className="text-xl">Todos</h1>
-    <ul>
+  <div className="m-8">
+    <h1 className="text-2xl text-[red]">Todos</h1>
+    <ul className="flex-col space-y-5">
       {todos.map(todo => (
-          <li key={todo.id}>{todo.title}</li>
+          <TodoItem key={todo.id}  {...todo} />
           ))}
     </ul>
+    <NewTask />
+    </div>
   </>
   )
 }
