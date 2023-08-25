@@ -16,4 +16,5 @@ model Post {
   title     String
   content   String
   done Boolean @default(false)
+  authorId  String?
 }
