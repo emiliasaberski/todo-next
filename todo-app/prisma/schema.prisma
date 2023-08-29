@@ -14,7 +14,7 @@ datasource db {
 model Post {
   id        String     @default(cuid()) @id
   title     String
-  content   String
-  done Boolean @default(false)
+  content   String?
+  done      Boolean 
   authorId  String?
 }

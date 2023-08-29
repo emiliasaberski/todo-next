@@ -8,12 +8,8 @@ async function createTodo(data: FormData) {
     if (typeof title !== "string" || title.length === 0) {
       throw new Error("Invalid Title")
     }
-    const content = data.get("content")?.valueOf()
-    if (typeof content !== "string" || content.length === 0) {
-      throw new Error("Invalid content")
-    }
   
-    await prisma.post.create({ data: { title, content, done: false } })
+    await prisma.post.create({ data: { title, done: false } })
   }
   
   export function NewTask() {
@@ -26,11 +22,6 @@ async function createTodo(data: FormData) {
           <input
             type="text"
             name="title"
-            className="border border-slate-300 bg-transparent rounded px-2 py-1 outline-none focus-within:border-slate-100"
-          />
-          <input
-            type="text"
-            name="content"
             className="border border-slate-300 bg-transparent rounded px-2 py-1 outline-none focus-within:border-slate-100"
           />
           <div className="flex gap-1 justify-end">
