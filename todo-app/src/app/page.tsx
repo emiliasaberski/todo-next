@@ -26,7 +26,7 @@ export default async function Home() {
     <h1 className="text-3xl text-[#005eff] mb-4 underline ">Todos</h1>
     <ul className="flex-col space-y-5 my-10">
       {todos.map(todo => (
-          <TodoItem key={todo.id}  {...todo} toggleTodo={toggleTodo} deleteTodo={deleteTodo}/>
+          <TodoItem key={todo.id} {...todo} toggleTodo={toggleTodo} deleteTodo={deleteTodo}/>
           ))}
     </ul>
     <div className="mt-10">
