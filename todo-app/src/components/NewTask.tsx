@@ -15,10 +15,8 @@ async function createTodo(data: FormData) {
   export function NewTask() {
     return (
       <>
-        <header className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl">New</h1>
-        </header>
-        <form action={createTodo} className="flex gap-2 flex-col">
+        <form action={createTodo} className="flex gap-2 flex-col w-full lg:w-1/2">
+          <label>New</label>
           <input
             type="text"
             name="title"

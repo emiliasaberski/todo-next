@@ -33,7 +33,7 @@ export function TodoItem({ id, title, done, toggleTodo, deleteTodo }: TodoItemPr
         {title}
       </label>
       <XSquare 
-      className="cursor-pointer text-[black] hover:text-[red]"
+      className="cursor-pointer text-[black] w-4 hover:text-[red] "
       onClick={handleDeleteClick}/>
     </li>
     </>
