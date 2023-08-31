@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import { prisma } from "../db";
 import Link from "next/link";
 
@@ -10,6 +11,7 @@ async function createTodo(data: FormData) {
     }
   
     await prisma.post.create({ data: { title, done: false } })
+    revalidatePath("/")
   }
   
   export function NewTask() {

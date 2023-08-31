@@ -1,6 +1,8 @@
+import { revalidatePath } from "next/cache";
 import { TodoItem } from "../components/TodoItem"
 import { NewTask } from "../components/NewTask"
 import { prisma } from "../db"
+
 
 export default async function Home() {
 
@@ -10,6 +12,7 @@ export default async function Home() {
     "use server"
   
     await prisma.post.update({ where: { id }, data: { done } })
+    revalidatePath("/")
   }
 
   async function deleteTodo(id: string) {
@@ -18,6 +21,7 @@ export default async function Home() {
     await prisma.post.delete({
       where: { id }
     })
+    revalidatePath("/")
   }
   
   return (
