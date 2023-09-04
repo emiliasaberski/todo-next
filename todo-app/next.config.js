@@ -3,6 +3,7 @@
 const NextConfig = {
   experimental: {
     serverActions: true,
+    clientActions: true,
   },
 }
 

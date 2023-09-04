@@ -2,6 +2,7 @@
 
 import { XSquare } from "lucide-react"
 
+
 type TodoItemProps = {
   id: string
   title: string
@@ -11,7 +12,6 @@ type TodoItemProps = {
 }
 
 export function TodoItem({ id, title, done, toggleTodo, deleteTodo }: TodoItemProps) {
-
   const handleDeleteClick = () => {
     deleteTodo(id);
   };
