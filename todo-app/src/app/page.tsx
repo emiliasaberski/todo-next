@@ -1,17 +1,18 @@
 "use client"
 
+import { useEffect } from "react";
 import { TodoItem } from "../components/TodoItem"
-import { prisma } from "../db"
 import { newTask } from "../components/NewTask";
 import { deleteTodo } from "../components/DeleteTodo";
 import { toggleTodo } from "../components/ToggleTodo";
+import { fetchTodo } from "../components/FetchTodos";
 import { experimental_useOptimistic as useOptimistic } from "react";
 
 type TaskProp = {
   task: string
 }
 
-export default async function Home( {tasks}: { tasks: TaskProp[] }) {
+export default function Home( {tasks}: { tasks: TaskProp[] }) {
   const [optimisticTodo, addOptimisticTodo] = useOptimistic(
     tasks,
     (state: any, task: FormData) => {
@@ -19,19 +20,25 @@ export default async function Home( {tasks}: { tasks: TaskProp[] }) {
     }
   )
     
-  const todos = await prisma.post.findMany()
-
   const addTask = async (tasks: FormData) => {
     addOptimisticTodo(tasks)
     await newTask(tasks)
   }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const todos = await fetchTodo();
+    };
+
+    fetchData();
+  }, []);
   
   return (
   <>
   <div className="m-8">
     <h1 className="text-3xl text-[#005eff] mb-4 underline ">Todos</h1>
     <ul className="flex-col space-y-5 my-10">
-      {todos.map(todo => (
+      {optimisticTodo.map(todo => (
           <TodoItem key={todo.id} {...todo} toggleTodo={toggleTodo} deleteTodo={deleteTodo}/>
           ))}
     </ul>

@@ -15,6 +15,7 @@ export function TodoItem({ id, title, done, toggleTodo, deleteTodo }: TodoItemPr
   const handleDeleteClick = () => {
     deleteTodo(id);
   };
+  
 
   return (
     <>

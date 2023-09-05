@@ -13,4 +13,5 @@ export async function newTask(data: FormData) {
   
     await prisma.post.create({ data: { title, done: false } })
     revalidatePath("/")
+
   }
