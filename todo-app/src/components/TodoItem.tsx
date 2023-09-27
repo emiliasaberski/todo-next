@@ -29,7 +29,7 @@ export function TodoItem({ id, title, done, toggleTodo, deleteTodo }: TodoItemPr
       />
       <label
         htmlFor={id}
-        className="cursor-pointer text-lg peer-checked:line-through peer-checked:text-slate-500"
+        className="cursor-pointer text-lg peer-checked:line-through peer-checked:text-[green] "
       >
         {title}
       </label>
