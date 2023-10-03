@@ -17,21 +17,23 @@ export default async function Home() {
     await prisma.post.update({ where: { id }, data: { done } })
     revalidatePath("/")
   }
+  const emptyState = (
+    <h2>Nothing here</h2>
+  );
 
 
   return (
-  <>
-  <div className="m-8">
+  <div className="flex flex-col w-full m-8 ">
     <h1 className="text-3xl text-[#005eff] mb-4 underline ">Todos</h1>
-    <ul className="flex-col space-y-5 my-10">
+    <div className="mt-10">
+    <NewTask/>
+    </div>
+    <ul className="space-y-5 my-10">
       {todos.map(todo => (
           <TodoItem key={todo.id} {...todo} toggleTodo={toggleTodo} deleteTodo={deleteTodo}/>
           ))}
     </ul>
-    <div className="mt-10">
-    <NewTask/>
+    {todos.length === 0 ? emptyState : null}
     </div>
-    </div>
-  </>
   )
 }

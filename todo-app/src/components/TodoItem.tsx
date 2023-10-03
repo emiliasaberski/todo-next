@@ -15,15 +15,15 @@ export function TodoItem({ id, title, done, toggleTodo, deleteTodo }: TodoItemPr
   const handleDeleteClick = () => {
     deleteTodo(id);
   };
-  
 
   return (
-    <>
-    <li className="flex gap-3 items-center">
+    <div className="block">
+    <li className="flex flex-row w-3/4 items-center justify-between">
+      <div className="justify-start">
       <input
         id={id}
         type="checkbox"
-        className="cursor-pointer peer"
+        className="mr-4 cursor-pointer peer"
         defaultChecked={done}
         onChange={e => toggleTodo(id, e.target.checked)}
       />
@@ -33,10 +33,11 @@ export function TodoItem({ id, title, done, toggleTodo, deleteTodo }: TodoItemPr
       >
         {title}
       </label>
+      </div>
       <XSquare 
       className="cursor-pointer text-[black] w-4 hover:text-[red] "
       onClick={handleDeleteClick}/>
     </li>
-    </>
+    </div>
   )
 }
