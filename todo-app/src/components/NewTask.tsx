@@ -16,20 +16,8 @@ async function createTodo(data: FormData) {
     revalidatePath("/")
   }
   
-    export async function NewTask(req: NextApiRequest) {
-      let errorMessage = ""; // Initialize error message as an empty string
-    
-      if (req.method === "POST") {
-        const formData = new FormData(req.body);
-        try {
-          await createTodo(formData);
-        } catch (error) {
-          if (error instanceof Error) {
-            errorMessage = error.message; // Set the error message if there was an error
-          }
-        }
-      }
-          
+    export async function NewTask() {
+
     return (
       <>
         <form action={createTodo} className="flex flex-col w-3/4 lg:w-1/2">
@@ -48,7 +36,6 @@ async function createTodo(data: FormData) {
             className="border-b-2 border-black bg-transparent outline-none focus-within:border-slate-100"
           />  
         </form>
-        {errorMessage && <p className="text-red-500">Invalid title</p>}
       </>
     )
   }
