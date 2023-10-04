@@ -1,26 +1,24 @@
+"use client"
+
 import { revalidatePath } from "next/cache";
 import { prisma } from "../db";
 import { PlusCircle } from 'lucide-react';
+import { createTodo } from "./CreateTodo";
 import { error } from "console";
 import { NextApiRequest } from "next";
-
-async function createTodo(data: FormData) {
-  "use server"
-
-    const title = data.get("title")?.valueOf()
-    if (typeof title !== "string" || title.length === 0) {
-      throw new Error("Invalid Title")
-    }
-
-    await prisma.post.create({ data: { title, done: false } })
-    revalidatePath("/")
-  }
+import { useRef } from "react";
   
-    export async function NewTask() {
-
+export function NewTask() {
+  const ref = useRef<HTMLFormElement>(null)
     return (
       <>
-        <form action={createTodo} className="flex flex-col w-3/4 lg:w-1/2">
+        <form 
+        ref={ref}
+        action={async formData => {
+          ref.current?.reset()
+          await createTodo(formData)
+        }} 
+        className="flex flex-col w-3/4 lg:w-1/2">
         <div className="flex justify-end">
           <button type="submit">
               <PlusCircle 
