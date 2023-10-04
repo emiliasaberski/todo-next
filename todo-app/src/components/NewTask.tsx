@@ -21,19 +21,17 @@ async function createTodo(data: FormData) {
     return (
       <>
         <form action={createTodo} className="flex flex-col w-3/4 lg:w-1/2">
-        <div className="flex gap-1 justify-end">
-          <button
-             type="submit"
-             >
+        <div className="flex justify-end">
+          <button type="submit">
               <PlusCircle 
-               className="text-black hover:text-grey"/>
+               className="text-black hover:text-green-600"/>
              </button>
             </div>
           <input
             type="text"
             name="title"
             placeholder="New todo"
-            className="border-b-2 border-black bg-transparent outline-none focus-within:border-slate-100"
+            className="border-b-2 border-black bg-transparent outline-none text-lg focus-within:border-slate-100"
           />  
         </form>
       </>

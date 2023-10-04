@@ -1,25 +1,27 @@
 "use client"
 
 import { XSquare } from "lucide-react"
+import { CreatedAt } from "./CreatedAt";
 
 
 type TodoItemProps = {
   id: string
   title: string
   done: boolean
+  createdAt: Date
   toggleTodo: (id: string, done: boolean) => void
   deleteTodo: (id: string) => void;
 }
 
-export function TodoItem({ id, title, done, toggleTodo, deleteTodo }: TodoItemProps) {
+export function TodoItem({ id, title, done, createdAt, toggleTodo, deleteTodo }: TodoItemProps) {
   const handleDeleteClick = () => {
     deleteTodo(id);
   };
 
   return (
-    <div className="block">
-    <li className="flex flex-row w-3/4 items-center justify-between">
-      <div className="justify-start">
+    <div className="w-full lg:w-1/2">
+    <li className="grid grid-cols-3 items-center">
+      <div className="">
       <input
         id={id}
         type="checkbox"
@@ -33,6 +35,9 @@ export function TodoItem({ id, title, done, toggleTodo, deleteTodo }: TodoItemPr
       >
         {title}
       </label>
+      </div>
+      <div className="justify-start ">
+      <CreatedAt createdAt={createdAt} />
       </div>
       <XSquare 
       className="cursor-pointer text-[black] w-4 hover:text-[red] "

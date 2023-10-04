@@ -14,6 +14,7 @@ datasource db {
 model Post {
   id        String     @default(cuid()) @id
   title     String
+  createdAt DateTime @default(now()) @db.Timestamp(6)
   content   String?
   done      Boolean 
   authorId  String?
