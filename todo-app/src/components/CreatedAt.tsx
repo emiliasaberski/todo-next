@@ -1,7 +1,7 @@
 "use client"
 
 type CreatedAtProps = {
-    createdAt: Date; // Corrected the prop type
+    createdAt: Date;
   };
   
   export function CreatedAt({ createdAt }: CreatedAtProps) {

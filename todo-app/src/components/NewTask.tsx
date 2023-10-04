@@ -12,7 +12,7 @@ import { deleteTodo } from "./DeleteTodo";
 import { toggleTodo } from "./ToggleTodo";
  
 type Todos = {
-  id: number
+  id: string
   title: string
 }
 
@@ -35,7 +35,7 @@ export function NewTask({
         action={async formData => {
           ref.current?.reset()
           addOptimisticTodo({
-            id: Math.random(),
+            id: "",
             title: "",
           })
           await createTodo(formData)
