@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { prisma } from "../db";
-import { PlusCircle } from 'lucide-react';
+import { PlusCircle, Square } from 'lucide-react';
 import { createTodo } from "./CreateTodo";
 import { error } from "console";
 import { NextApiRequest } from "next";
@@ -10,10 +10,14 @@ import { useRef } from "react";
 import { experimental_useOptimistic as useOptimistic } from "react";
 import { deleteTodo } from "./DeleteTodo";
 import { toggleTodo } from "./ToggleTodo";
+import { CreatedAt } from "./CreatedAt";
+import { XSquare } from "lucide-react"
  
 type Todos = {
   id: string
   title: string
+  done: boolean
+  createdAt: Date
 }
 
 type TodosProps = {
@@ -24,7 +28,7 @@ export function NewTask({
   todos
 }: TodosProps) {
   const ref = useRef<HTMLFormElement>(null)
-  const [optimistTodos, addOptimisticTodo] =
+  const [optimisticTodos, addOptimisticTodo] =
   useOptimistic(todos, (state, newTodo: Todos) => {
     return [...state, newTodo]
   })
@@ -37,6 +41,8 @@ export function NewTask({
           addOptimisticTodo({
             id: "",
             title: "",
+            done: false,
+            createdAt: Date
           })
           await createTodo(formData)
         }} 
@@ -55,8 +61,30 @@ export function NewTask({
           />  
         </form>
         <ul className="space-y-5 my-10">
-      {optimistTodos.map(todo => (
-          <li key={todo.id}>{todo.title}</li>
+      {optimisticTodos.map(todo => (
+              <li className="grid grid-cols-3 items-center">
+              <div className="">
+              <input
+                id={todo.id}
+                type="checkbox"
+                className="mr-4 cursor-pointer peer"
+                defaultChecked={todo.done}
+                onChange={e => toggleTodo(todo.id, e.target.checked)}
+              />
+              <label
+                htmlFor={todo.id}
+                className="cursor-pointer text-lg peer-checked:line-through peer-checked:text-[green] "
+              >
+                {todo.title}
+              </label>
+              </div>
+              <div className="justify-start ">
+              <CreatedAt createdAt={todo.createdAt} />
+              </div>
+              <XSquare 
+              className="cursor-pointer text-[black] w-4 hover:text-[red] "
+              onClick={e => deleteTodo(todo.id, e.target.delete)}/>
+            </li>
           ))}
     </ul>
       </>
